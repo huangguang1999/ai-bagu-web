@@ -3,6 +3,8 @@
 > 像刷 LeetCode 一样刷 AI 面试八股 —— 100+ 真实面试题 + 零基础也能看懂的大白话讲解,
 > 并以 **MCP / REST API** 开放题库,可接入任意 AI agent。
 
+🌐 **线上地址:[ai-bagu-web.vercel.app](https://ai-bagu-web.vercel.app)**
+
 参考 [aihot](https://aihot.virxact.com/) 的「列表 + 分类 + Agent 接入」形态,题库来自开源仓库
 [awesome-ai-knowledge](https://github.com/huangguang1999/awesome-ai-knowledge)。
 
@@ -58,7 +60,7 @@ curl "http://localhost:3000/api/random?category=rag"
 
 ```bash
 # Claude Code 一键接入(AI_BAGU_BASE 指向你部署的站点)
-claude mcp add ai-bagu -e AI_BAGU_BASE=https://你的域名 -- npx -y ai-bagu-mcp
+claude mcp add ai-bagu -e AI_BAGU_BASE=https://ai-bagu-web.vercel.app -- npx -y ai-bagu-mcp
 
 # 或本地直接跑(先 cd mcp && npm install)
 AI_BAGU_BASE=http://localhost:3000 node mcp/server.mjs
