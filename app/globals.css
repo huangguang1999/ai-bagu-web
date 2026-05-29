@@ -1,26 +1,58 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0b0e14;
+  --panel: #12161f;
+  --border: #222836;
+  --text: #e6e9ef;
+  --muted: #8b94a7;
+  --accent: #4f9dff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+}
+
+/* 答案 markdown 排版 */
+.prose-cn {
+  line-height: 1.85;
+  color: var(--text);
+}
+.prose-cn p {
+  margin: 0.6em 0;
+}
+.prose-cn strong {
+  color: #fff;
+}
+.prose-cn ul {
+  margin: 0.5em 0;
+  padding-left: 1.3em;
+  list-style: disc;
+}
+.prose-cn li {
+  margin: 0.35em 0;
+}
+.prose-cn code {
+  background: #1c2230;
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #9ecbff;
+}
+.prose-cn h1,
+.prose-cn h2,
+.prose-cn h3 {
+  margin: 1em 0 0.5em;
+  font-weight: 700;
+}
+.prose-cn a {
+  color: var(--accent);
+  text-decoration: underline;
 }

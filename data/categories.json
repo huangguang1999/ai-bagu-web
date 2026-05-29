@@ -1,0 +1,134 @@
+[
+  {
+    "title": "大模型基础",
+    "slug": "llm-basics",
+    "order": 1,
+    "intro": "AI 是怎么读字、怎么生成、内部长什么样——入门先懂这些。",
+    "source": {
+      "name": "datawhalechina/hello-agents",
+      "url": "https://github.com/datawhalechina/hello-agents"
+    },
+    "count": 12,
+    "difficulty": "入门"
+  },
+  {
+    "title": "AI Agent(智能体)",
+    "slug": "agent",
+    "order": 2,
+    "intro": "让 AI 不止会聊天,还能自己规划、调工具、干完一件事。",
+    "source": {
+      "name": "datawhalechina/hello-agents",
+      "url": "https://github.com/datawhalechina/hello-agents"
+    },
+    "count": 9,
+    "difficulty": "进阶"
+  },
+  {
+    "title": "RAG(检索增强)",
+    "slug": "rag",
+    "order": 3,
+    "intro": "给 AI 配一个'随时能翻的资料库',让它少瞎编、能用上你自己的知识。",
+    "source": {
+      "name": "datawhalechina/hello-agents",
+      "url": "https://github.com/datawhalechina/hello-agents"
+    },
+    "count": 10,
+    "difficulty": "进阶"
+  },
+  {
+    "title": "模型与 Agent 评估",
+    "slug": "eval",
+    "order": 4,
+    "intro": "怎么判断一个 AI / Agent 到底好不好用。",
+    "source": {
+      "name": "datawhalechina/hello-agents",
+      "url": "https://github.com/datawhalechina/hello-agents"
+    },
+    "count": 4,
+    "difficulty": "进阶"
+  },
+  {
+    "title": "Prompt 工程",
+    "slug": "prompt",
+    "order": 5,
+    "intro": "同一个模型,会不会写提示词,效果天差地别。",
+    "source": {
+      "name": "amitshekhariitbhu/ai-engineering-interview-questions",
+      "url": "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions"
+    },
+    "count": 11,
+    "difficulty": "入门"
+  },
+  {
+    "title": "微调与对齐",
+    "slug": "finetune",
+    "order": 6,
+    "intro": "怎么把通用大模型'调教'成你专属的、更听话的模型。",
+    "source": {
+      "name": "amitshekhariitbhu/ai-engineering-interview-questions",
+      "url": "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions"
+    },
+    "count": 11,
+    "difficulty": "进阶"
+  },
+  {
+    "title": "工具调用 & MCP",
+    "slug": "tools-mcp",
+    "order": 7,
+    "intro": "让 AI 学会调 API、用工具,以及 MCP 这个'工具接口标准'。",
+    "source": {
+      "name": "amitshekhariitbhu/ai-engineering-interview-questions",
+      "url": "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions"
+    },
+    "count": 8,
+    "difficulty": "进阶"
+  },
+  {
+    "title": "部署与推理优化",
+    "slug": "serving",
+    "order": 8,
+    "intro": "模型上线后怎么跑得更快、更省、更稳(LLMOps)。",
+    "source": {
+      "name": "amitshekhariitbhu/ai-engineering-interview-questions",
+      "url": "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions"
+    },
+    "count": 11,
+    "difficulty": "挑战"
+  },
+  {
+    "title": "向量与 Embedding",
+    "slug": "embedding",
+    "order": 9,
+    "intro": "AI '理解语义'和'按相似度查找'的地基。",
+    "source": {
+      "name": "amitshekhariitbhu/ai-engineering-interview-questions",
+      "url": "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions"
+    },
+    "count": 8,
+    "difficulty": "入门"
+  },
+  {
+    "title": "多模态",
+    "slug": "multimodal",
+    "order": 10,
+    "intro": "让 AI 不只看文字,还能看图、看视频、听声音。",
+    "source": {
+      "name": "datawhalechina/hello-agents",
+      "url": "https://github.com/datawhalechina/hello-agents"
+    },
+    "count": 6,
+    "difficulty": "进阶"
+  },
+  {
+    "title": "AI 应用实战 & 安全",
+    "slug": "app-safety",
+    "order": 11,
+    "intro": "真把 AI 用到生产里会踩的坑,以及怎么防。",
+    "source": {
+      "name": "amitshekhariitbhu/ai-engineering-interview-questions",
+      "url": "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions"
+    },
+    "count": 10,
+    "difficulty": "挑战"
+  }
+]

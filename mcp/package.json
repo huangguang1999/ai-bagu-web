@@ -1,0 +1,13 @@
+{
+  "name": "ai-bagu-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for AI 八股大白话题库 — 随机出题/搜索/按分类拉题",
+  "type": "module",
+  "bin": { "ai-bagu-mcp": "server.mjs" },
+  "files": ["server.mjs"],
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.0"
+  }
+}

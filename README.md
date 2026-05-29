@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI 八股 · 大白话刷题站
 
-## Getting Started
+> 像刷 LeetCode 一样刷 AI 面试八股 —— 100+ 真实面试题 + 零基础也能看懂的大白话讲解,
+> 并以 **MCP / REST API** 开放题库,可接入任意 AI agent。
 
-First, run the development server:
+参考 [aihot](https://aihot.virxact.com/) 的「列表 + 分类 + Agent 接入」形态,题库来自开源仓库
+[awesome-ai-knowledge](https://github.com/huangguang1999/awesome-ai-knowledge)。
+
+## 功能
+
+- **刷题列表**:11 个分类筛选、难度标(入门/进阶/挑战)、关键词搜索、随机一题
+- **题目详情**:先自测、点击展开大白话讲解(💡 一句话 / 🌰 比方 / 🔑 要点 / 🚀 延伸)
+- **做题进度**:已掌握 / 收藏,存浏览器 localStorage,无需登录、不上传
+- **Agent 接入**:开放 REST API + MCP server,任意 AI 都能拉题/出题/搜索
+
+## 技术栈
+
+Next.js 16(App Router)· React 19 · Tailwind v4 · TypeScript · 部署 Vercel。
+题库是纯静态 JSON,题目页全部 SSG 预渲染。
+
+## 本地开发
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 题库数据
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+题目源是同级目录的 `awesome-ai-knowledge/docs/*.md`。内容更新后重新生成:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run sync         # 解析 markdown → data/questions.json + categories.json
+```
 
-## Learn More
+`data/*.json` 已提交进仓库,是部署时的数据源(Vercel 上不依赖源 md)。
 
-To learn more about Next.js, take a look at the following resources:
+## REST API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+无鉴权、已开 CORS,直接调用:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| 接口 | 说明 |
+|---|---|
+| `GET /api/categories` | 全部分类 |
+| `GET /api/questions?category=&difficulty=&q=&limit=&offset=&fields=meta` | 题目列表 |
+| `GET /api/questions/:id` | 单题详情 |
+| `GET /api/random?category=` | 随机一题 |
+| `GET /api/search?q=` | 搜索 |
 
-## Deploy on Vercel
+```bash
+curl "http://localhost:3000/api/random?category=rag"
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## MCP 接入
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`mcp/` 是独立的 MCP server(`ai-bagu-mcp`),把题库封装成 4 个工具:
+`list_categories`、`random_question`、`search_questions`、`get_question`。
+
+```bash
+# Claude Code 一键接入(AI_BAGU_BASE 指向你部署的站点)
+claude mcp add ai-bagu -e AI_BAGU_BASE=https://你的域名 -- npx -y ai-bagu-mcp
+
+# 或本地直接跑(先 cd mcp && npm install)
+AI_BAGU_BASE=http://localhost:3000 node mcp/server.mjs
+```
+
+## 部署到 Vercel
+
+把本仓库导入 Vercel(或 `vercel` CLI),框架自动识别为 Next.js,零配置部署。
+
+## 免责声明
+
+答案为 AI 辅助生成的大白话版,可能有误(尤其具体工具/版本细节),请把它当入门读物,
+关键内容对照官方文档核实。题目出处见各题底部。
