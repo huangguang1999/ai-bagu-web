@@ -1,11 +1,29 @@
 {
   "name": "ai-bagu-mcp",
   "version": "0.1.0",
-  "description": "MCP server for AI 八股大白话题库 — 随机出题/搜索/按分类拉题",
+  "description": "MCP server for AI 八股大白话题库 — 随机出题 / 搜索 / 按分类拉题,接入任意支持 MCP 的 AI agent",
   "type": "module",
   "bin": { "ai-bagu-mcp": "server.mjs" },
-  "files": ["server.mjs"],
+  "files": ["server.mjs", "README.md"],
   "engines": { "node": ">=18" },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai-interview",
+    "llm-interview",
+    "八股",
+    "interview",
+    "ai-agent"
+  ],
+  "homepage": "https://ai-bagu-web.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huangguang1999/ai-bagu-web.git",
+    "directory": "mcp"
+  },
+  "bugs": "https://github.com/huangguang1999/ai-bagu-web/issues",
+  "author": "huangguang1999",
+  "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
     "zod": "^3.23.0"
