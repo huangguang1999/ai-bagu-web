@@ -54,7 +54,7 @@ export function randomQuestion(slug?: string): Question {
 }
 
 export const DIFFICULTY_COLORS: Record<string, string> = {
-  入门: "text-emerald-400 border-emerald-400/30 bg-emerald-400/10",
-  进阶: "text-amber-400 border-amber-400/30 bg-amber-400/10",
-  挑战: "text-rose-400 border-rose-400/30 bg-rose-400/10",
+  入门: "text-[var(--ok)] border-[var(--ok)]/25 bg-[var(--ok)]/10",
+  进阶: "text-[var(--warn)] border-[var(--warn)]/25 bg-[var(--warn)]/10",
+  挑战: "text-[var(--hard)] border-[var(--hard)]/25 bg-[var(--hard)]/10",
 };

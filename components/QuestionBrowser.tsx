@@ -42,16 +42,20 @@ export default function QuestionBrowser({
 
   return (
     <div>
-      {/* 顶部进度 + 随机 */}
-      <div className="mb-6 flex flex-wrap items-center gap-4 rounded-xl border border-[var(--border)] bg-[var(--panel)] p-4">
-        <div className="flex-1">
-          <div className="text-sm text-[var(--muted)]">
-            已掌握 <span className="text-[var(--text)] font-semibold">{masteredCount}</span> / {questions.length} 题
+      {/* 进度 + 随机 */}
+      <div className="card mb-5 flex flex-wrap items-center gap-4 p-4">
+        <div className="min-w-[180px] flex-1">
+          <div className="flex items-baseline justify-between text-sm">
+            <span className="text-[var(--muted)]">学习进度</span>
+            <span className="text-[var(--faint)]">
+              <span className="font-semibold text-[var(--ok)]">{masteredCount}</span>
+              {" "}/ {questions.length} 已掌握
+            </span>
           </div>
-          <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-[var(--bg)]">
+          <div className="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-[var(--bg)]">
             <div
-              className="h-full rounded-full bg-emerald-400 transition-all"
-              style={{ width: `${pct}%` }}
+              className="h-full rounded-full bg-gradient-to-r from-[var(--ok)] to-[#5ee0a8] transition-all duration-500"
+              style={{ width: `${Math.max(pct, 2)}%` }}
             />
           </div>
         </div>
@@ -61,86 +65,77 @@ export default function QuestionBrowser({
             const q = pool[Math.floor(Math.random() * pool.length)];
             router.push(`/q/${q.id}`);
           }}
-          className="rounded-lg border border-[var(--accent)]/40 bg-[var(--accent)]/10 px-4 py-2 text-sm font-medium text-[var(--accent)] hover:bg-[var(--accent)]/20"
+          className="rounded-xl bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[var(--accent)]/20 transition hover:brightness-110 active:scale-[0.98]"
         >
           🎲 随机一题
         </button>
       </div>
 
       {/* 搜索 */}
-      <input
-        value={kw}
-        onChange={(e) => setKw(e.target.value)}
-        placeholder="搜索题目 / 答案关键词…"
-        className="mb-4 w-full rounded-lg border border-[var(--border)] bg-[var(--panel)] px-4 py-2.5 text-sm outline-none focus:border-[var(--accent)]"
-      />
+      <div className="relative mb-4">
+        <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--faint)]">🔍</span>
+        <input
+          value={kw}
+          onChange={(e) => setKw(e.target.value)}
+          placeholder="搜索题目 / 答案关键词…"
+          className="card w-full py-3 pl-10 pr-4 text-sm outline-none transition focus:border-[var(--accent)]"
+        />
+      </div>
 
       {/* 分类筛选 */}
       <div className="mb-3 flex flex-wrap gap-2">
         <Chip active={cat === "全部"} onClick={() => setCat("全部")}>
-          全部 {questions.length}
+          全部 <span className="opacity-60">{questions.length}</span>
         </Chip>
         {categories.map((c) => (
           <Chip key={c.slug} active={cat === c.slug} onClick={() => setCat(c.slug)}>
-            {c.title} {c.count}
+            {c.title} <span className="opacity-60">{c.count}</span>
           </Chip>
         ))}
       </div>
 
-      {/* 难度 + 过滤开关 */}
+      {/* 难度 + 过滤 */}
       <div className="mb-5 flex flex-wrap items-center gap-2">
         {DIFFS.map((d) => (
-          <Chip key={d} active={diff === d} onClick={() => setDiff(d)} small>
-            {d}
-          </Chip>
+          <Chip key={d} active={diff === d} onClick={() => setDiff(d)} small>{d}</Chip>
         ))}
-        <span className="mx-1 text-[var(--border)]">|</span>
-        <Chip active={onlyTodo} onClick={() => setOnlyTodo((v) => !v)} small>
-          只看未掌握
-        </Chip>
-        <Chip active={onlyFav} onClick={() => setOnlyFav((v) => !v)} small>
-          ★ 只看收藏
-        </Chip>
+        <span className="mx-1 h-4 w-px bg-[var(--border)]" />
+        <Chip active={onlyTodo} onClick={() => setOnlyTodo((v) => !v)} small>只看未掌握</Chip>
+        <Chip active={onlyFav} onClick={() => setOnlyFav((v) => !v)} small>★ 只看收藏</Chip>
+        <span className="ml-auto self-center text-xs text-[var(--faint)]">{filtered.length} 题</span>
       </div>
 
       {/* 列表 */}
-      <div className="overflow-hidden rounded-xl border border-[var(--border)]">
+      <div className="card overflow-hidden">
         {filtered.length === 0 && (
-          <div className="p-8 text-center text-sm text-[var(--muted)]">
-            没有匹配的题目
-          </div>
+          <div className="p-10 text-center text-sm text-[var(--muted)]">没有匹配的题目,换个筛选试试</div>
         )}
         {filtered.map((q, i) => (
           <div
             key={q.id}
-            className={`flex items-center gap-3 border-b border-[var(--border)] px-4 py-3 last:border-0 hover:bg-[var(--panel)] ${
-              i % 2 ? "bg-[var(--bg)]" : "bg-[var(--panel)]/40"
-            }`}
+            className="group flex items-center gap-3 border-b border-[var(--border-soft)] px-3 py-3 transition last:border-0 hover:bg-white/[0.03] sm:px-4"
           >
+            <span className="w-5 shrink-0 text-right text-xs tabular-nums text-[var(--faint)]">{i + 1}</span>
             <span
-              className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs ${
+              className={`grid h-5 w-5 shrink-0 place-items-center rounded-full text-[11px] ${
                 mastered.has(q.id)
-                  ? "bg-emerald-400/20 text-emerald-400"
+                  ? "bg-[var(--ok)]/15 text-[var(--ok)]"
                   : "border border-[var(--border)] text-transparent"
               }`}
               title={mastered.has(q.id) ? "已掌握" : "未掌握"}
             >
               ✓
             </span>
-            <Link href={`/q/${q.id}`} className="min-w-0 flex-1 hover:text-[var(--accent)]">
-              <span className="line-clamp-1 text-sm">{q.question}</span>
+            <Link href={`/q/${q.id}`} className="min-w-0 flex-1 text-sm text-[var(--text)] transition group-hover:text-[var(--accent)]">
+              <span className="line-clamp-1">{q.question}</span>
             </Link>
-            <span className="hidden shrink-0 text-xs text-[var(--muted)] sm:inline">
-              {q.category}
-            </span>
-            <span
-              className={`shrink-0 rounded border px-1.5 py-0.5 text-xs ${DIFFICULTY_COLORS[q.difficulty]}`}
-            >
+            <span className="hidden shrink-0 text-xs text-[var(--faint)] md:inline">{q.category}</span>
+            <span className={`shrink-0 rounded-md border px-2 py-0.5 text-[11px] font-medium ${DIFFICULTY_COLORS[q.difficulty]}`}>
               {q.difficulty}
             </span>
             <button
               onClick={() => toggleFav(q.id)}
-              className={`shrink-0 text-base ${fav.has(q.id) ? "text-amber-400" : "text-[var(--border)] hover:text-[var(--muted)]"}`}
+              className={`shrink-0 text-base transition ${fav.has(q.id) ? "text-[var(--warn)]" : "text-[var(--border)] hover:text-[var(--muted)]"}`}
               title="收藏"
             >
               ★
@@ -166,10 +161,10 @@ function Chip({
   return (
     <button
       onClick={onClick}
-      className={`rounded-full border px-3 ${small ? "py-1 text-xs" : "py-1.5 text-sm"} transition ${
+      className={`rounded-full border px-3 transition ${small ? "py-1 text-xs" : "py-1.5 text-[13px]"} ${
         active
-          ? "border-[var(--accent)] bg-[var(--accent)]/15 text-[var(--accent)]"
-          : "border-[var(--border)] text-[var(--muted)] hover:text-[var(--text)]"
+          ? "border-transparent bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] font-medium text-white"
+          : "border-[var(--border)] bg-[var(--panel)] text-[var(--muted)] hover:border-[var(--faint)] hover:text-[var(--text)]"
       }`}
     >
       {children}
